@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correction DM1 Mathématiques CM2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+         <!-- 💡 Script MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 15px;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #4a6fa5;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        
+        .teacher-info {
+            font-style: italic;
+            color: #666;
+            margin: 8px 0;
+        }
+        
+        .exercise {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #4a6fa5;
+        }
+        
+        .exercise-title {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .exercise-title::before {
+            content: "•";
+            color: #4a6fa5;
+            font-size: 24px;
+            margin-right: 8px;
+        }
+        
+        .points {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .question {
+            margin-bottom: 18px;
+            padding: 12px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .question-title {
+            font-size: 15px;
+            color: #4a6fa5;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 13px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #4a6fa5;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .answer-btn {
+            background-color: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 8px 0;
+            font-size: 13px;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .answer-btn:hover {
+            background-color: #3a5a80;
+        }
+        
+        .answer-btn::after {
+            content: "▼";
+            font-size: 10px;
+        }
+        
+        .answer-btn.active::after {
+            content: "▲";
+        }
+        
+        .solution {
+            background-color: #e8f4f8;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 8px;
+            display: none;
+            border-left: 2px solid #4a6fa5;
+            font-size: 13px;
+        }
+        
+        .solution.show {
+            display: block;
+        }
+        
+        .correct-answer {
+            color: #27ae60;
+            font-weight: 500;
+        }
+        
+        .math-expression {
+            font-family: 'Times New Roman', serif;
+            font-size: 15px;
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+            text-align: center;
+        }
+        
+        .calculation {
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #f1f8e9;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        
+        .true-false {
+            display: flex;
+            gap: 15px;
+            margin: 5px 0;
+        }
+        
+        .true-false-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #4a6fa5;
+            border-radius: 3px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .checkbox.checked::after {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .conversion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .conversion-item {
+            padding: 8px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border-left: 3px solid #4a6fa5;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            
+            table {
+                font-size: 12px;
+            }
+            
+            th, td {
+                padding: 6px;
+            }
+            
+            body {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .conversion-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Devoir Maison N°1 — Correction</h1>
+            <p class="teacher-info">MATHEMATIQUES - CM2</p>
+            <p class="teacher-info"><strong>Pr. Nabil TAROUS</strong></p>
+        </header>
+        
+        <div class="exercise">
+            <h2 class="exercise-title">Exercice 1 :  <span class="points">7 pts</span></h2>
+            
+            <div class="question">
+                <h3 class="question-title">1. Vrai ou faux. Cocher la bonne réponse. <span class="points">3 pts</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution1a')">Voir la correction</button>
+                <div id="solution1a" class="solution">
+                    <div class="true-false">
+                        <div class="true-false-item">
+                            <div class="checkbox checked"></div>
+                            <span>A) Un angle plat mesure 180° — <span class="correct-answer">VRAI</span></span>
+                        </div>
+                    </div>
+                    <div class="true-false">
+                        <div class="true-false-item">
+                            <div class="checkbox checked"></div>
+                            <span>B) Un angle aigu mesure toujours moins de 90° — <span class="correct-answer">VRAI</span></span>
+                        </div>
+                    </div>
+                    <div class="true-false">
+                        <div class="true-false-item">
+                            <div class="checkbox checked"></div>
+                            <span>C) Un angle obtus est compris entre 90° et 180° — <span class="correct-answer">VRAI</span></span>
+                        </div>
+                    </div>
+                    <div class="true-false">
+                        <div class="true-false-item">
+                            <div class="checkbox"></div>
+                            <span>D) Deux angles complémentaires ont une somme de 180° — <span class="correct-answer">FAUX</span></span>
+                        </div>
+                    </div>
+                    <p><em>Explication : Deux angles complémentaires ont une somme de 90°, pas 180°.</em></p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3 class="question-title">2. Complète le tableau ci-dessous. <span class="points">4 pts</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution1b')">Voir la correction</button>
+                <div id="solution1b" class="solution">
+                    <p><em>Note : Les réponses peuvent varier selon la figure de référence.</em></p>
+                    <table>
+                        <tr>
+                            <th>Angle</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                            <th>6</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Nom</strong></td>
+                            <td class="correct-answer">$$\widehat{ABC}$$</td>
+                            <td class="correct-answer">$$\widehat{BCD}$$</td>
+                            <td class="correct-answer">$$\widehat{CDE}$$</td>
+                            <td class="correct-answer">$$\widehat{DEF}$$</td>
+                            <td class="correct-answer">$$\widehat{EFG}$$</td>
+                            <td class="correct-answer">$$\widehat{FGH}$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nature</strong></td>
+                            <td class="correct-answer">Aigu</td>
+                            <td class="correct-answer">Obtus</td>
+                            <td class="correct-answer">Obtus</td>
+                            <td class="correct-answer">Aigu</td>
+                            <td class="correct-answer">Droit</td>
+                            <td class="correct-answer">Obtus</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sommet</strong></td>
+                            <td class="correct-answer">$$B$$</td>
+                            <td class="correct-answer">$$C$$</td>
+                            <td class="correct-answer">$$D$$</td>
+                            <td class="correct-answer">$$E$$</td>
+                            <td class="correct-answer">$$F$$</td>
+                            <td class="correct-answer">$$G$$</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Côtés</strong></td>
+                            <td class="correct-answer">$$[BA)$$ et $$[BC)$$ </td>
+                            <td class="correct-answer">$$[CB)$$  et $$[CD)$$ </td>
+                            <td class="correct-answer">$$[DC)$$  et $$[DE)$$ </td>
+                            <td class="correct-answer">$$[ED)$$  et $$[EF)$$ </td>
+                            <td class="correct-answer">$$[FE)$$  et $$[FG)$$ </td>
+                            <td class="correct-answer">$$[GF)$$  et $$[GH)$$ </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h2 class="exercise-title">Exercice 2 : (10 Points) <span class="points">10 pts</span></h2>
+            
+            <div class="question">
+                <h3 class="question-title">1. Dans le nombre 7 618 294 <span class="points">2 pts</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution2a')">Voir la correction</button>
+                <div id="solution2a" class="solution">
+                    <p>- Le chiffre des unités est : <span class="correct-answer">4</span></p>
+                    <p>- Le chiffre des dizaines de mille est : <span class="correct-answer">1</span></p>
+                    <p>- Le chiffre des unités de millions est : <span class="correct-answer">7</span></p>
+                    <p>- Le nombre de centaines est : <span class="correct-answer">76 182</span> (car 7 618 294 ÷ 100 = 76 182,94)</p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3 class="question-title">2. Écris en lettres les nombres entiers suivants. <span class="points">1 pt</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution2b')">Voir la correction</button>
+                <div id="solution2b" class="solution">
+                    <p>- 215 063 : <span class="correct-answer">Deux-cent-quinze-mille-soixante-trois</span></p>
+                    <p>- 3 075 619 : <span class="correct-answer">Trois-millions-soixante-quinze-mille-six-cent-dix-neuf</span></p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3 class="question-title">3. Écris en chiffres chacun des nombres. <span class="points">1 pt</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution2c')">Voir la correction</button>
+                <div id="solution2c" class="solution">
+                    <p>- Trois cent huit mille soixante-douze : <span class="correct-answer">308 072</span></p>
+                    <p>- Six millions huit cent mille quatre cent quinze : <span class="correct-answer">6 800 415</span></p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3 class="question-title">4. Décompose les nombres suivants. <span class="points">1 pt</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution2d')">Voir la correction</button>
+                <div id="solution2d" class="solution">
+                    <p>- 53 407 : <span class="correct-answer">(5 × 10 000) + (3 × 1 000) + (4 × 100) + (0 × 10) + (7 × 1)</span></p>
+                    <p>- 340 825 : <span class="correct-answer">(3 × 100 000) + (4 × 10 000) + (0 × 1 000) + (8 × 100) + (2 × 10) + (5 × 1)</span></p>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3 class="question-title">5. Pose et calcule les opérations suivantes : <span class="points">4 pts</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution2e')">Voir la correction</button>
+                <div id="solution2e" class="solution">
+                    <div class="math-expression">A) 4 785 – 927</div>
+                    <div class="calculation">
+                        4785<br>
+                        -  927<br>
+                        ------<br>
+                        <span class="correct-answer">3858</span>
+                    </div>
+                    
+                    <div class="math-expression">B) 1824 + 958</div>
+                    <div class="calculation">
+                        1824<br>
+                        +  958<br>
+                        ------<br>
+                        <span class="correct-answer">2782</span>
+                    </div>
+                    
+                    <div class="math-expression">C) 743 × 68</div>
+                    <div class="calculation">
+                        743<br>
+                        ×  68<br>
+                        ------<br>
+                        5944<br>
+                        +4458<br>
+                        ------<br>
+                        <span class="correct-answer">50524</span>
+                    </div>
+                    
+                    <div class="math-expression">D) 342 157 – 96 845</div>
+                    <div class="calculation">
+                        342157<br>
+                        - 96845<br>
+                        ------<br>
+                        <span class="correct-answer">245312</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="question">
+                <h3 class="question-title">6. Calcule les sommes suivantes en effectuant des regroupements astucieux. <span class="points">1 pt</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution2f')">Voir la correction</button>
+                <div id="solution2f" class="solution">
+                    <p>- 145 + 87 + 55 + 13 = <span class="correct-answer">(145 + 55) + (87 + 13) = 200 + 100 = 300</span></p>
+                    <p>- 25 × 38 × 4 × 0 = <span class="correct-answer">0</span> (tout nombre multiplié par 0 donne 0)</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="exercise">
+            <h2 class="exercise-title">Exercice 3 : (3 Points) <span class="points">3 pts</span></h2>
+            
+            <div class="question">
+                <h3 class="question-title">1. Effectue ces conversions dans l'unité demandée : <span class="points">3 pts</span></h3>
+                <button class="answer-btn" onclick="toggleSolution('solution3a')">Voir la correction</button>
+                <div id="solution3a" class="solution">
+                    <div class="conversion-grid">
+                        <div class="conversion-item">
+                            <p>a) 4,5 km = <span class="correct-answer">4500</span> m</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>b) 28 dam = <span class="correct-answer">280</span> m</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>c) 7,2 hm = <span class="correct-answer">720 000</span> mm</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>d) 3,8 kg = <span class="correct-answer">3800</span> g</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>e) 15,5 t = <span class="correct-answer">15 500</span> kg</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>f) 450 g = <span class="correct-answer">0,450</span> kg</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>g) 75 m² = <span class="correct-answer">0,000075</span> km²</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>h) 820 hm² = <span class="correct-answer">8 200 000</span> m²</p>
+                        </div>
+                        <div class="conversion-item">
+                            <p>i) 350 hm² = <span class="correct-answer">3,5</span> km²</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSolution(solutionId) {
+            const solution = document.getElementById(solutionId);
+            const button = solution.previousElementSibling;
+            
+            solution.classList.toggle('show');
+            button.classList.toggle('active');
+            
+            if (solution.classList.contains('show')) {
+                button.textContent = 'Masquer la correction';
+            } else {
+                button.textContent = 'Voir la correction';
+            }
+        }
+        
+        // Optionnel : fonction pour tout ouvrir
+        function showAllSolutions() {
+            const solutions = document.querySelectorAll('.solution');
+            const buttons = document.querySelectorAll('.answer-btn');
+            
+            solutions.forEach(solution => {
+                solution.classList.add('show');
+            });
+            
+            buttons.forEach(button => {
+                button.classList.add('active');
+                button.textContent = 'Masquer la correction';
+            });
+        }
+    </script>
+</body>
+</html>
